@@ -1,0 +1,52 @@
+<kelurahan>
+  <id>123</id>
+  <kode>BKS001</kode>
+  <nama>BEKASI </nama>
+  <kodepos>17426</kodepos>
+</kelurahan>
+
+<kelurahan id="123" kode="BKS001" nama="BEKASI">
+</kelurahan>
+
+
+
+
+<daftarKelurahanRequest>
+    <pencarian>
+        <nama>cilil</nama>
+    </pencarian
+</daftarKelurahanRequest>
+
+
+<daftarKelurahanResponse>
+    <datarKelurahan>
+        <kelurahan>
+            <id>123</id>
+            <kode>BKS001</kode>
+            <nama>BEKASI </nama>
+            <kodepos>17426</kodepos>
+        </kelurahan>
+        <kelurahan>
+            <id>123</id>
+            <kode>BKS001</kode>
+            <nama>BEKASI </nama>
+            <kodepos>17426</kodepos>
+        </kelurahan>
+        <kelurahan>
+            <id>123</id>
+            <kode>BKS001</kode>
+            <nama>BEKASI </nama>
+            <kodepos>17426</kodepos>
+        </kelurahan>
+    </daftarKelurahan>
+</daftarKelurahanResponse>
+
+
+
+class kelurahan {
+        private String id;
+        private String kode;
+        private String nama;
+        private String kodepos;
+}
+

@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>2.2.6.RELEASE</version>
+        <relativePath/> <!-- lookup parent from repository -->
+    </parent>
+        
+        
+    <!--  
+    
+                <dependency>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-starter-web</artifactId>
+                </dependency> ( sudah include tomcat server)
+            
+           
+           cara mengganti port default 
+            dalam application.properties
+                server.port= 1000
+              untuk server bebas kita yang tentukan 
+             
+           
+        maven -> tools untuk project management di java,
+        sudah mengatur struktur folder, depdency management dan berbagai 
+        macam plugin untuk melakukan proses 
+     
+        main class -> class yang didalamnya ada method, class dari webSpring
+        Applications
+     
+        pom -> deskripsi project
+        setiap project yang kita buat dapat didaftarkan bersifat unix 
+        dan dapat di gunakan didalama project lain . 
+        
+        project depedency yang sudah di dowload berada pada
+           home/.m2 /repository -> isi m2 bisa dicopy komputer lain, 
+           agar tidak download secara otomatis . tinggal copy dan paste
+           
+            groupId   = organisasi yang membuat software 
+            artifact  = software yang dibuat
+            version   = versi software yang dibuat
+            packaging = jar atau war ( disesuaikan dengan kebutuhan )
+            name      = nama website
+            description = deskripsi dari aplikasi yang dibuat
+            
+            depedency = library yang dibutuhkan
+                
+             static    = tempat file html
+             templates = tempat dari css, js dan sebagainya yang dibutukan 
+        
+        
+        
+        *Controller
+        
+             spring boot -> menggunakan mvc pattern model view conttroler, 
+             semua request di tangani oleh controller
+             controller adalah java file biasa , yang diberi anotation ( keterangan) 
+              yang akan menghandle request dengan url  tertentu
+              
+             untuk nama bebas tidak harus ada controller, namun untuk kemudahan kita menggunakan
+             controller agar mudah dipahami oleh programmer lain 
+        
+        handler -> untuk menanggani proses https request 
+        
+                
+        @Controller
+        public class WaktuController {
+        @GetMapping("/waktu")
+        @ResponseBody
+            public String sekarang(){
+            SimpleDateFormat formatwaktu = new SimpleDateFormat("EEEE. dd MM yyyy", new Locale("id", "ID"));
+           return formatwaktu.format(new Date());
+                }  
+        
+        @Controller -> supaya di proses 
+        @GetMapping -> untuk menghandle url apa 
+        @ResponseBody -> supaya output langsung di hasilkan output 
+        ( tanpa menggunakan templates html ) 
+        
+        
+        *json 
+        
+              @GetMapping("/appinfo")
+                @ResponseBody
+                public Map<String, String> info(@RequestParam String nama){
+                      Map<String, String> data = new LinkedHashMap<>();
+                          data.put("application.name", "Aplikasi SIUP");
+                          data.put("application.version", "1.0.0");
+                          data.put("application.update", "2020-01-01");
+                          data.put("author", nama);
+                          return data;
+                          // assosiative array 
+                  }
+              }
+        
+              *application properties
+              server.port=10000 mengubah port 
+                    agar json rapih 
+                spring.jackson.serialization.indent_output=true
+
+            assosiative array -> array yang indexnya bukan angka 
+            dijava map ( assosiative array ) -> ada key dan value
+            
+            interface  = deklarasi tipe data
+            implementasi = hasmap ( hastable ) linkmap ( linked list ) untuk
+            interface. 
+            linkedhasmap = urutanya dipelihara yang dimasukin duluan keluarnya duluan
+            hasmap biasa datanya tidak random
+            
+            @RequestParam -> menerima masukan dari user 
+                          -> dia sebagai paramater request
+                          
+           
+        
+        
+    -->
+    <groupId>com.paytech</groupId>
+    <artifactId>WebSpringService</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+    <name>WebSpringService</name>
+    <description>Demo project for Spring Boot</description>
+
+    <properties>
+        <java.version>1.8</java.version>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>wsdl4j</groupId>
+            <artifactId>wsdl4j</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.junit.vintage</groupId>
+                    <artifactId>junit-vintage-engine</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+            <plugin>
+	<groupId>org.codehaus.mojo</groupId>
+	<artifactId>jaxb2-maven-plugin</artifactId>
+	<version>2.5.0</version>
+	<executions>
+		<execution>
+			<id>xjc</id>
+			<goals>
+				<goal>xjc</goal>
+			</goals>
+		</execution>
+	</executions>
+	<configuration>
+		<sources>
+			<source>${project.basedir}/src/main/resources</source>
+                        <source>${project.basedir}/src/main/java</source>
+		</sources>
+	</configuration>
+</plugin>
+        </plugins>
+    </build>
+
+</project>
