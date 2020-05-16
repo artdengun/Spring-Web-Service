@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package com.paytech.SpringWebService.konfigurasi;
 
 import org.springframework.boot.web.servlet.ServletRegistrationBean;
@@ -17,10 +13,7 @@ import org.springframework.ws.wsdl.wsdl11.DefaultWsdl11Definition;
 import org.springframework.xml.xsd.SimpleXsdSchema;
 import org.springframework.xml.xsd.XsdSchema;
 
-/**
- *
- * @author denigunawan
- */
+
 
 @Configuration
 @EnableWs
