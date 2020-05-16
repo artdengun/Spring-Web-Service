@@ -65,9 +65,9 @@ Panggil Json
 
 ```
 	http://localhost:8080/appinfo?nama=DeniGunawan
-``
+```
 
-Untuk merapihkan Fie Json Letakkan pada Application.properties dan perintahnya
+## Agar Supaya Rapih gunakan perintah  Dibawah dan letakan pada application properties
 
 ```
 spring.jackson.serialization.indent_output=true
