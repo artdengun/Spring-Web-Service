@@ -994,7 +994,7 @@ Cara Check Migration di database `select * from schema_version \G`
 
 tambahkan baris berikut di `src/main/resources/application.properties`
 
-```
+```java
         spring.datasource.url=jdbc:mysql://localhost:3306/siupdb?useLegacyDatetimeCode=false&serverTimezone=UTC
         spring.datasource.username=siupdbuser
         spring.datasource.password=siup123
