@@ -120,7 +120,7 @@ spring.jackson.serialization.indent_output=true
 ## TAHAP KEDUA ##
 -----------------
 
-## WEB SERVICE KONFIGURASI
+## WEB SERVICE KONFIGURASI ##
 
  1. Buat File Yang Dibutuhkan	
 
@@ -174,7 +174,7 @@ spring.jackson.serialization.indent_output=true
     }	
 
 ```
-## Penjelasan
+## Penjelasan ##
 
 ```
 	<daftarKelurahanResponse> 
@@ -221,7 +221,7 @@ Query Cari data kelurahan (Request)
   * Gunakan XSD DESIGN model Salami Slice
   * Copy Request Pertama kali 
 
-  SEBELUM 
+##  SEBELUM  ##
 
   ```
    <daftarKelurahanRequest>
@@ -232,7 +232,7 @@ Query Cari data kelurahan (Request)
  
   ```
 
-  SESUDAH
+## SESUDAH ##
 
    ```xml
   <xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
@@ -257,7 +257,7 @@ Query Cari data kelurahan (Request)
 
    * Copy Response
   
-   SEBELUM
+##   SEBELUM ##
 
    ```
 	<daftarKelurahanResponse> 
@@ -284,7 +284,7 @@ Query Cari data kelurahan (Request)
     </daftarKelurahanResponse>
 
    ```
-   SESUDAH
+##   SESUDAH ##
 
    ```xml
 	<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
@@ -409,7 +409,7 @@ Bagian Plugin
            </plugin>
 ```
 
-## Penjelasan
+## Penjelasan ##
 
 * wsdl dan web service Library yang dibutuhkan Memproses  XML
 * jaxb akan mengenerate domain class . begitu terima request , file tersebut akan di generat otomatis. dari file 
@@ -458,7 +458,7 @@ KonfigurasiSoap.java
 }
 
 ```
-## Penjelasan
+## Penjelasan ##
 
 ```java
 @Configuration
@@ -511,7 +511,7 @@ KonfigurasiSoap.java
 * Untuk membuat wisdle kita  butuh xsd,  kita definisikan pada bagian terakhir 
 
 
-## tambahkan sedikit konfigurasi dari file xsd yang kita buat 
+## tambahkan sedikit konfigurasi dari file xsd yang kita buat  ##
 
 ```java
 
@@ -574,7 +574,7 @@ targetNamespace="http://paytech.com/webservices/siup">
 ```
 
 
-# IMPLEMENT SOAP ENDPOINT ( HARDCORE ) -> TIDAK MENGGUNAKAN DATABASE
+## IMPLEMENT SOAP ENDPOINT ( HARDCORE ) -> TIDAK MENGGUNAKAN DATABASE ##
 
 1. Buat FIle di DTO dengan nama KelurahanEndpoint.java
 
@@ -633,7 +633,7 @@ tambahkan perintah di KelurahanDaftar.java
 	}
 ```
 
-## Penjelasan
+## PENJELASAN ##
 
 * @RequestPayload -> Request akan diparsing dan dimasukan objeknya
 * @PayloadRoot(localPart = "daftarKelurahanRequest", namespace = "http://paytech.com/webservices/siup") -> root elemen 
@@ -659,7 +659,7 @@ tambahkan perintah di KelurahanDaftar.java
 
 ```
 
-#PENJELASAN
+## PENJELASAN ##
 
 * Kita test di Postman. Tipenya POST , body raw , Tipe text/XML
 * jika sudah berjalan Simpan SoapEnlope
@@ -667,7 +667,7 @@ tambahkan perintah di KelurahanDaftar.java
 * Buat lagi Folder dengan nama SoapRequest
 * buat Emptyfile "kelurahan-request.xml" simpan
 
-Isi FIle Kelurahan-Request.xml
+Isi FIle `Kelurahan-Request.xml`
 
 ```xml
 
@@ -685,7 +685,7 @@ Isi FIle Kelurahan-Request.xml
 
 ```
 
-* buat Emptyfile "kelurahan-response.xml" simpan
+* buat Emptyfile `kelurahan-response.xml` simpan
 
 
 Isi FIle Kelurahan-Response.xml
@@ -723,9 +723,9 @@ Isi FIle Kelurahan-Response.xml
 
 ```
 
-# IMPLEMENT SOAP ENDPOINT (DESCRIPTION) -> Koneksi dengan database
+## IMPLEMENT SOAP ENDPOINT (DESCRIPTION) -> Koneksi dengan database ##
 
-jAXB berguna untuk mengenerate file XSD ke file java yang akan menghasilkan File java  (Clean and build) , JAXB akan mendeteksi tipe data sendiri . perintah (Clean) akan menghapus generate dari jaxb
+JAXB berguna untuk mengenerate file XSD ke file java yang akan menghasilkan File java  (Clean and build) , JAXB akan mendeteksi tipe data sendiri . perintah (Clean) akan menghapus generate dari jaxb
 
 1.  BUAT SOAP ENDPOINT TANPA GENERATE JAXB
 
@@ -786,7 +786,7 @@ public class kelurahan {
 }
 ```
 
-Pencarian.java
+Pencarian.java	
 ```java
 	package com.paytech.SpringWebService.dto;
 
@@ -950,22 +950,45 @@ fitur :
      
 
 
-## SETUP Spring Data JPA ##
+## Implementasi Akses Database ##
 
 1.  Tambahkan LIbrary di `pom.xml`
-
     * Database Driver (Mysql)
     * Migration (flyway)
     * Spring Data Jpa
-2.  Buat Migration Script
+```java
+	 <dependency>
+            <groupId>org.flywaydb</groupId>
+            <artifactId>flyway-core</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+        </dependency>
+
+	<dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-jpa</artifactId>
+        </dependency>
+
+```
+2.  Buat Migration Script 
+	* Buat file di resources
+	* Buat Folder resources/db
+	* Buat Folder resources/db/migration
+	* Buat Empty file dengan nama `V1.0.0.20201604__Skema_Kelurahan.sql`
+`V1.0.0.20201604__Skema_Kelurahan.sql`
+```sql
+create table kelurahan (
+    id INT PRIMARY KEY AUTO_INCREMENT, 
+    kde VARCHAR(10) NOT NULL UNIQUE,
+    nama VARCHAR(255) NOT NULL,
+    kodepos VARCHAR(10) NOT NULL
+);
+
+Cara Check Migration di database `select * from schema_version \G`
+```
 3.  Buat Konfigurasi koneksi Database
-4.  Buat user database dan databasenya
-5.  Buat entity mapping class dengan tabel
-6.  Buat Dao
-7.  Gunakan di aplikasi web
-
-
-## Konfigurasi Koneksi Database ##
 
 tambahkan baris berikut di `src/main/resources/application.properties`
 
@@ -978,4 +1001,12 @@ tambahkan baris berikut di `src/main/resources/application.properties`
         spring.jpa.properties.hibernate.format_sql=true
 
 ```
+4.  Buat user database dan databasenya
+    * Buka Terminal ketik ` mysql -u root -p ` ( Login Ke Mysql)
+    * ketikan perintah ` grant all on siupdb.* to siupdbuser@localhost identified by 'siup123'; ` ( buat user database)
+    * Buat Database ` create database siupdb; ` ( buat database )
+
+5.  Buat entity mapping class dengan tabel
+6.  Buat Dao
+7.  Gunakan di aplikasi web
 
