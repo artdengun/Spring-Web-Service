@@ -131,14 +131,17 @@ spring.jackson.serialization.indent_output=true
       <kode>JKT001</kode>
       <nama>DUREN SAWIT</nama>
       <kodepos>14000</kodepos>
-      </kelurahan>
+  </kelurahan>
 
-      <kelurahan id='123' kode='JKT001' nama="DUREN SAWIT> </kelurahan>
+      <kelurahan id='123' kode='JKT001' nama="DUREN SAWIT"> </kelurahan>
+
+
       <daftarKelurahanRequest>
         <pencarian>
           <nama>Cili</nama>
         </pencarian>
       </daftarKelurahanRequest>
+
     <daftarKelurahanResponse> 
         <daftarKelurahan>
             <kelurahan>
@@ -160,7 +163,7 @@ spring.jackson.serialization.indent_output=true
                 <kodepos>124896</kodepos>
             </kelurahan>
         </daftarKelurahan>
-    <daftarKelurahanResponse>
+    </daftarKelurahanResponse>
 
     private kelurahan {
         private String id;
@@ -169,5 +172,205 @@ spring.jackson.serialization.indent_output=true
         private String kodepos;
 
     }	
+
 ```
-## Penjelasan		
+## Penjelasan
+
+```
+	<daftarKelurahanResponse> 
+        <daftarKelurahan>
+            <kelurahan>
+                <id>123</id>
+                <kode>JKT001</kode>
+                <nama>Duren Sawit</nama>
+                <kodepos>124896</kodepos>
+            </kelurahan>
+            <kelurahan>
+                <id>124</id>
+                <kode>JKT002</kode>
+                <nama>Duren Sawit</nama>
+                <kodepos>124896</kodepos>
+            </kelurahan>
+            <kelurahan>
+                <id>124</id>
+                <kode>JKT003</kode>
+                <nama>Duren Sawit</nama>
+                <kodepos>124896</kodepos>
+            </kelurahan>
+        </daftarKelurahan>
+    </daftarKelurahanResponse>
+
+```
+Query Ambil data kelurahan (Response)
+
+```
+	<daftarKelurahanRequest>
+          <pencarian>
+         	 <nama>Cili</nama>
+           </pencarian>
+      	</daftarKelurahanRequest>
+
+```
+Query Cari data kelurahan (Request)
+
+
+
+2. Genereate File ke  XSD to XML
+
+  * Kunjungi web  https://www.freeformatter.com/xsd-generator.html
+  * Gunakan XSD DESIGN model Salami Slice
+  * Copy Request Pertama kali 
+
+  SEBELUM 
+
+  ```
+   <daftarKelurahanRequest>
+          <pencarian>
+         	 <nama>Cili</nama>
+           </pencarian>
+      	</daftarKelurahanRequest>
+ 
+  ```
+
+  SESUDAH
+
+   ```xml
+  <xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="nama" type="xs:string"/>
+  <xs:element name="pencarian">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="nama"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="daftarKelurahanRequest">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="pencarian"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>
+
+   ```
+
+   * Copy Response
+  
+   SEBELUM
+
+   ```
+	<daftarKelurahanResponse> 
+        <daftarKelurahan>
+            <kelurahan>
+                <id>123</id>
+                <kode>JKT001</kode>
+                <nama>Duren Sawit</nama>
+                <kodepos>124896</kodepos>
+            </kelurahan>
+            <kelurahan>
+                <id>124</id>
+                <kode>JKT002</kode>
+                <nama>Duren Sawit</nama>
+                <kodepos>124896</kodepos>
+            </kelurahan>
+            <kelurahan>
+                <id>124</id>
+                <kode>JKT003</kode>
+                <nama>Duren Sawit</nama>
+                <kodepos>124896</kodepos>
+            </kelurahan>
+        </daftarKelurahan>
+    </daftarKelurahanResponse>
+
+   ```
+   SESUDAH
+
+   ```xml
+	<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="id" type="xs:byte"/>
+  <xs:element name="kode" type="xs:string"/>
+  <xs:element name="nama" type="xs:string"/>
+  <xs:element name="kodepos" type="xs:int"/>
+  <xs:element name="kelurahan">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="id"/>
+        <xs:element ref="kode"/>
+        <xs:element ref="nama"/>
+        <xs:element ref="kodepos"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="daftarKelurahan">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="kelurahan" maxOccurs="unbounded" minOccurs="0"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="daftarKelurahanResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="daftarKelurahan"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>
+
+   ```
+
+  * Jadikan Satu
+
+   ```
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="id" type="xs:integer"/> // ubah dari Byte Ke Integer ( Tipe data yang digunakan )
+  <xs:element name="kode" type="xs:string"/>
+  <xs:element name="nama" type="xs:string"/>
+  <xs:element name="kodepos" type="xs:integer"/>
+  <xs:element name="pencarian">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="nama"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="daftarKelurahanRequest">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="pencarian"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="kelurahan">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="id"/>
+        <xs:element ref="kode"/>
+        <xs:element ref="nama"/>
+        <xs:element ref="kodepos"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="daftarKelurahan">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="kelurahan" maxOccurs="unbounded" minOccurs="0"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="daftarKelurahanResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="daftarKelurahan"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>
+
+
+
+   ```
+
+
+		
