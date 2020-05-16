@@ -322,8 +322,9 @@ Query Cari data kelurahan (Request)
 
   * Jadikan Satu
 
-   ```
-<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+   ```xml
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	>
   <xs:element name="id" type="xs:integer"/> // ubah dari Byte Ke Integer ( Tipe data yang digunakan )
   <xs:element name="kode" type="xs:string"/>
   <xs:element name="nama" type="xs:string"/>
