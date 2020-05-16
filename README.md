@@ -38,16 +38,16 @@
 
 ```java
 
-		@Controller
-		public class WaktuController {
+@Controller
+public class WaktuController {
 
-		@GetMapping("/waktu")
-		@ResponseBody
-			public String sekarang(){
-			SimpleDateFormat formatwaktu = new SimpleDateFormat("EEEE, dd MMMM yyyy",new Locale("id","ID"));
-			return formatwaktu.format(new Date());
+  @GetMapping("/waktu")
+  @ResponseBody
+	public String sekarang(){
+	SimpleDateFormat formatwaktu = new SimpleDateFormat("EEEE, dd MMMM yyyy",new Locale("id","ID"));
+	return formatwaktu.format(new Date());
 
-			}
+	}
 		
 
 ```
@@ -61,11 +61,11 @@
 * return 			-> Mengembalikan nilai yang dituju
 
 ```java
-		public String sekarang(){
-			SimpleDateFormat formatwaktu = new SimpleDateFormat("EEEE, dd MMMM yyyy",new Locale("id","ID"));
-			return formatwaktu.format(new Date());
+	public String sekarang(){
+	   SimpleDateFormat formatwaktu = new SimpleDateFormat("EEEE, dd MMMM yyyy",new Locale("id","ID"));
+		return formatwaktu.format(new Date());
 
-			}
+		}
 
 ```
 * Membuat Object sekarang dengan Menggunakan library SimpleDateFormat(library tanggal ) Untuk Menampilkan waktu 
@@ -460,7 +460,7 @@ KonfigurasiSoap.java
 ```
 ## Penjelasan
 
-```
+```java
 @Configuration
         @EnableWs
          public class KonfigurasiSoap extends WsConfigurerAdapter
@@ -471,7 +471,7 @@ KonfigurasiSoap.java
 * @Configuration -> annotation agar file ini  di proses
 * extends WsConfigurerAdapter -> method method untuk konfigurasi web service
 
-```
+```java
 @Bean
 	 public ServletRegistrationBean messageDispatcherServlet(ApplicationContext applicationContext) {
 		MessageDispatcherServlet servlet = new MessageDispatcherServlet();
@@ -484,7 +484,7 @@ KonfigurasiSoap.java
 * handler jika ada request ke ws , semua yang mengarah ke url ws akan dihandler oleh konfigurasi diatas. 
 
 
-```
+```java
 
 @Bean(name = "siup")
 	public DefaultWsdl11Definition defaultWsdl11Definition(XsdSchema xsdSiup) {
@@ -501,7 +501,7 @@ KonfigurasiSoap.java
 
 * definisi / konfigurasi wisdl agar otomatis dibuatkan
 
-```
+```java
    @Bean
 	public XsdSchema countriesSchema() {
 		return new SimpleXsdSchema(new ClassPathResource("siup.xsd"));
