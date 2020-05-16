@@ -89,6 +89,7 @@
     }
 }
 
+```
 #Penjelasan
 
 * public class WaktuController	-> Menyatakan Nama File Dari Class yang digunakan
@@ -96,9 +97,9 @@
 * @ResponseBody			-> Langsung menampilkan output tanpa membutuhkan file lain (HTML template)
 * Map				-> assosiative array yang ada di java yang memiliki key dan value
 
+
 * return 			-> Mengembalikan nilai yang dituju
 
-```
 
 *Panggil Json Lewat URl
 
