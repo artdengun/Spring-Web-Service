@@ -16,12 +16,23 @@
 
 ```
 
+#Penjelasan 
+
+* GroupId 	-> Menyatakan Software House Yang membuat aplikasi
+* Artifact	-> Menyatakan Nama Aplikasi Yang dibuat
+* Description	-> Menyatakan Keterangan Aplikasi Yang dibuat
+
+
  2. Depedency  Awal 
 
 ```java
 		Spring-web
 
 ```
+
+#Penjelasan
+
+* Spring-web	-> Package/library Awal yang dibutuhkan Untuk Spring Web
 
  3. Membuat Controller
 
@@ -41,7 +52,26 @@
 
 ```
 
- 3. Membuat Controller Untuk Json 
+#Penjelasan
+
+* @Controller			-> Class yang menyatakan Bahwa File ini sebagai Controller Proses
+* public class WaktuController	-> Menyatakan Nama File Dari Class yang digunakan
+* @GetMapping("/waktu")		-> Menghandle Url
+* @ResponseBody			-> Langsung menampilkan output tanpa membutuhkan file lain (HTML template)
+* return 			-> Mengembalikan nilai yang dituju
+
+```java
+		public String sekarang(){
+			SimpleDateFormat formatwaktu = new SimpleDateFormat("EEEE, dd MMMM yyyy",new Locale("id","ID"));
+			return formatwaktu.format(new Date());
+
+			}
+
+```
+* Membuat Object sekarang dengan Menggunakan library SimpleDateFormat(library tanggal ) Untuk Menampilkan waktu 
+  Jam, hari, bulan, dan tahun 
+
+ 4. Membuat Controller Untuk Json 
 
 ```java
 
@@ -59,15 +89,24 @@
     }
 }
 
+#Penjelasan
+
+* public class WaktuController	-> Menyatakan Nama File Dari Class yang digunakan
+* @GetMapping("/appinfo")	-> Menghandle url
+* @ResponseBody			-> Langsung menampilkan output tanpa membutuhkan file lain (HTML template)
+* Map				-> assosiative array yang ada di java yang memiliki key dan value
+
+* return 			-> Mengembalikan nilai yang dituju
+
 ```
 
-Panggil Json
+*Panggil Json Lewat URl
 
 ```
 	http://localhost:8080/appinfo?nama=DeniGunawan
 ```
 
-## Agar Supaya Rapih gunakan perintah  Dibawah dan letakan pada application properties
+*Agar Supaya Rapih gunakan perintah  Dibawah dan letakan pada application.properties
 
 ```
 spring.jackson.serialization.indent_output=true
