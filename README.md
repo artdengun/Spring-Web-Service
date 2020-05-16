@@ -113,40 +113,60 @@ spring.jackson.serialization.indent_output=true
 * LinkedHashMap 		-> Salah satu agar Json Terurut Sesuai Dengan TREE yang ada di put.
 * nama				-> mengembalikan nilai nama yang diinput dan menampilkan di author
 * return 			-> Mengembalikan nilai yang dituju
-* http://localhost:8080/appinfo?nama=DeniGunawan --> Input Json dengan cara manual 
-* spring.jackson.serialization.indent_output=tru --> agar Json Lebih rapih  ( Letakan di application.properties)
+* http://localhost:8080/appinfo?nama=DeniGunawan  -> Input Json dengan cara manual 
+* spring.jackson.serialization.indent_output=tru  -> agar Json Lebih rapih  ( Letakan di application.properties)
 
+-----------------
+## TAHAP KEDUA ##
+-----------------
 
- 3. Membuat Controller
+## WEB SERVICE KONFIGURASI
 
-```java
+ 1. Buat File Yang Dibutuhkan	
 
-		@Controller
-		public class WaktuController {
-		@GetMapping("/waktu")
-		@ResponseBody
-		public String sekarang(){
-		SimpleDateFormat formatwaktu = new SimpleDateFormat("EEEE, dd MMMM yyyy",new Locale("id","ID"));
-		return formatwaktu.format(new Date());
-		}
-		}
 
 ```
+<kelurahan>
+      <id>123</id>
+      <kode>JKT001</kode>
+      <nama>DUREN SAWIT</nama>
+      <kodepos>14000</kodepos>
+      </kelurahan>
 
+      <kelurahan id='123' kode='JKT001' nama="DUREN SAWIT> </kelurahan>
+      <daftarKelurahanRequest>
+        <pencarian>
+          <nama>Cili</nama>
+        </pencarian>
+      </daftarKelurahanRequest>
+    <daftarKelurahanResponse> 
+        <daftarKelurahan>
+            <kelurahan>
+                <id>123</id>
+                <kode>JKT001</kode>
+                <nama>Duren Sawit</nama>
+                <kodepos>124896</kodepos>
+            </kelurahan>
+            <kelurahan>
+                <id>124</id>
+                <kode>JKT002</kode>
+                <nama>Duren Sawit</nama>
+                <kodepos>124896</kodepos>
+            </kelurahan>
+            <kelurahan>
+                <id>124</id>
+                <kode>JKT003</kode>
+                <nama>Duren Sawit</nama>
+                <kodepos>124896</kodepos>
+            </kelurahan>
+        </daftarKelurahan>
+    <daftarKelurahanResponse>
 
+    private kelurahan {
+        private String id;
+        private String kode;
+        private String nama;
+        private String kodepos;
 
- 3. Membuat Controller
-
-```java
-
-		@Controller
-		public class WaktuController {
-		@GetMapping("/waktu")
-		@ResponseBody
-		public String sekarang(){
-		SimpleDateFormat formatwaktu = new SimpleDateFormat("EEEE, dd MMMM yyyy",new Locale("id","ID"));
-		return formatwaktu.format(new Date());
-		}
-		}
-
+    }	
 ```
