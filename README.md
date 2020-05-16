@@ -90,19 +90,6 @@
 }
 
 ```
-## Penjelasan
-
-* public class WaktuController	-> Menyatakan Nama File Dari Class yang digunakan
-* @GetMapping("/appinfo")	-> Menghandle url
-* @ResponseBody			-> Langsung menampilkan output tanpa membutuhkan file lain (HTML template)
-* Map				-> assosiative array yang ada di java yang memiliki key dan value
-* @RequestParam			-> Menghandle inputan dari External
-* data.put			-> Meletakan/ menempelkan Nilai yang ingin kita tampilkan
-* LinkedHashMap 		-> Salah satu agar Json Terurut Sesuai Dengan TREE yang ada di put.
-* nama				-> mengembalikan nilai nama yang diinput dan menampilkan di author
-* return 			-> Mengembalikan nilai yang dituju
-
-
 *Panggil Json Lewat URl
 
 ```
@@ -115,7 +102,19 @@
 spring.jackson.serialization.indent_output=true
 
 ```
+## Penjelasan
 
+* public class WaktuController	-> Menyatakan Nama File Dari Class yang digunakan
+* @GetMapping("/appinfo")	-> Menghandle url
+* @ResponseBody			-> Langsung menampilkan output tanpa membutuhkan file lain (HTML template)
+* Map				-> assosiative array yang ada di java yang memiliki key dan value
+* @RequestParam			-> Menghandle inputan dari External
+* data.put			-> Meletakan/ menempelkan Nilai yang ingin kita tampilkan
+* LinkedHashMap 		-> Salah satu agar Json Terurut Sesuai Dengan TREE yang ada di put.
+* nama				-> mengembalikan nilai nama yang diinput dan menampilkan di author
+* return 			-> Mengembalikan nilai yang dituju
+* http://localhost:8080/appinfo?nama=DeniGunawan --> Input Json dengan cara manual 
+* spring.jackson.serialization.indent_output=tru --> agar Json Lebih rapih  ( Letakan di application.properties)
 
 
  3. Membuat Controller
